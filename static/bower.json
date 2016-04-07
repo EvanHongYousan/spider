@@ -1,0 +1,19 @@
+{
+  "name": "spider",
+  "version": "0.0.0",
+  "homepage": "https://github.com/EvanHongYousan/spider",
+  "authors": [
+    "Evan Yan <1370204201@qq.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.3"
+  }
+}
