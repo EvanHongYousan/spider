@@ -2,11 +2,29 @@
  * Created by yantianyu on 16/4/5.
  */
 
-var superagent = require('superagent');
+var superagent = require('superagent-charset')(require('superagent'));
 var cheerio = require('cheerio');
 
-module.exports = function (req, res) {
+function filterCatchedAndDuplicate(oriArray, alreadyCatch) {
+    var temp = {}, newArray = [], newArray2 = [];
+    oriArray.forEach(function (item) {
+        if (temp[item] == undefined) {
+            temp[item] = 1;
+            newArray.push(item);
+        }
+    });
+    newArray.forEach(function (item) {
+        if (alreadyCatch[item] == undefined) {
+            newArray2.push(item);
+        }
+    });
+    return newArray2;
+}
+
+module.exports = function (req, res, next) {
+    var alreadyCatch = {}, readyToCatch = [];
     superagent.get('https://s.2.taobao.com/list/list.htm?q=' + req.params.name + '&search_type=item&app=shopsearch')
+        .charset('GBK')
         .end(function (err, sres) {
             // 常规的错误处理
             if (err) {
@@ -23,8 +41,12 @@ module.exports = function (req, res) {
                     title: $element.text(),
                     href: $element.attr('href')
                 });
+                readyToCatch.push('http:' + $element.attr('href'));
             });
-
+            alreadyCatch['https://s.2.taobao.com/list/list.htm?q=' + req.params.name + '&search_type=item&app=shopsearch'] = true;
+            readyToCatch = filterCatchedAndDuplicate(readyToCatch, alreadyCatch);
+            console.log(alreadyCatch);
+            console.log(readyToCatch);
             res.send(hrefs);
         });
 };
