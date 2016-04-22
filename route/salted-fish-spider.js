@@ -62,7 +62,8 @@ function fetchUrls(readyToCatch, res) {
             $('#J_ItemListsContainer .item-lists .item-info-wrapper').each(function (idx, element) {
                 datas.push({
                     title: $(element).find('.item-title').text(),
-                    price: $(element).find('.item-price .price em').text()
+                    price: $(element).find('.item-price .price em').text(),
+                    href: 'http:' + $(element).find('.item-title a').attr('href')
                 });
             });
             alreadyCatch[url] = true;
@@ -72,6 +73,9 @@ function fetchUrls(readyToCatch, res) {
                 console.log('已经catch：' + url);
                 console.log('readyToCatch.length:' + readyToCatch.length);
             } else {
+                datas.sort(function (a, b) {
+                    return parseInt(a.price) - parseInt(b.price);
+                });
                 res.json(datas);
             }
         });
