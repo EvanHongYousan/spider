@@ -4,6 +4,21 @@
 
 var superagent = require('superagent-charset')(require('superagent'));
 var cheerio = require('cheerio');
+var utils = require('../tools/utils');
+var iconv = require('iconv-lite');
+
+var alreadyCatch = {}, readyToCatch = [];
+var datas = [];
+
+//将中文转化为GB2312
+function chinese2Gb2312(data) {
+    var gb2312 = iconv.encode(data.toString('UCS2'), 'GB2312');
+    var gb2312Hex = "";
+    for (var i = 0; i < gb2312.length; ++i) {
+        gb2312Hex += '%' + utils.toHex(gb2312[i]);
+    }
+    return gb2312Hex;
+}
 
 function filterCatchedAndDuplicate(oriArray, alreadyCatch) {
     var temp = {}, newArray = [], newArray2 = [];
@@ -22,11 +37,17 @@ function filterCatchedAndDuplicate(oriArray, alreadyCatch) {
 }
 
 module.exports = function (req, res, next) {
-    var alreadyCatch = {}, readyToCatch = [];
-    superagent.get('https://s.2.taobao.com/list/list.htm?q=' + req.params.name + '&search_type=item&app=shopsearch')
+    alreadyCatch = {}, readyToCatch = [], datas = [];
+    readyToCatch.push('https://s.2.taobao.com/list/list.htm?q=' + chinese2Gb2312(req.params.name) + '&search_type=item&app=shopsearch');
+    fetchUrls(readyToCatch, res);
+};
+
+
+function fetchUrls(readyToCatch, res) {
+    var url = readyToCatch.pop();
+    superagent.get(url)
         .charset('GBK')
         .end(function (err, sres) {
-            // 常规的错误处理
             if (err) {
                 return next(err);
             }
@@ -34,19 +55,24 @@ module.exports = function (req, res, next) {
             // 就可以得到一个实现了 jquery 接口的变量，我们习惯性地将它命名为 `$`
             // 剩下就都是 jquery 的内容了
             var $ = cheerio.load(sres.text);
-            var hrefs = [];
             $('#J_Pages a').each(function (idx, element) {
                 var $element = $(element);
-                hrefs.push({
-                    title: $element.text(),
-                    href: $element.attr('href')
-                });
                 readyToCatch.push('http:' + $element.attr('href'));
             });
-            alreadyCatch['https://s.2.taobao.com/list/list.htm?q=' + req.params.name + '&search_type=item&app=shopsearch'] = true;
+            $('#J_ItemListsContainer .item-lists .item-info-wrapper').each(function (idx, element) {
+                datas.push({
+                    title: $(element).find('.item-title').text(),
+                    price: $(element).find('.item-price .item-price em').text()
+                });
+            });
+            alreadyCatch[url] = true;
             readyToCatch = filterCatchedAndDuplicate(readyToCatch, alreadyCatch);
-            console.log(alreadyCatch);
-            console.log(readyToCatch);
-            res.send(hrefs);
+            if (readyToCatch.length > 0) {
+                fetchUrls(readyToCatch, res);
+                console.log('已经catch：' + url);
+                console.log('readyToCatch.length:' + readyToCatch.length);
+            } else {
+                res.json(datas);
+            }
         });
-};
+}

@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="catchApp">
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <title>咸鱼抓取</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+
+        .btn-success {
+            margin-bottom: 20px;
+        }
+    </style>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script>
+        var app = angular.module('catchApp', []);
+        app.controller('catchCtrl', function ($scope, $http) {
+            $scope.catchDatas = [];
+            $scope.search = function () {
+                $http({
+                    method: 'GET',
+                    url: './xysearch/' + $scope.keyWord
+                }).then(function (resp) {
+                    console.log(resp);
+                    $scope.catchDatas = resp.data;
+                });
+            };
+        });
+    </script>
 </head>
 <body>
-index
+<div class="container" ng-controller="catchCtrl">
+    <form class="form-horizontal hjlsForm" action="" method="GET">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <input type="text" class="form-control" id="" name="" placeholder="关键词" value=""
+                       ng-model="keyWord"
+                        >
+            </div>
+        </div>
+        <button type="button" class="btn btn-success btn-block btn-lg" ng-click="search()">提交</button>
+    </form>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">抓取结果</div>
+        <!--<div class="panel-body">-->
+        <!--<p>...</p>-->
+        <!--</div>-->
+
+        <!-- List group -->
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="item in catchDatas">{{item.title}}:{{item.price}}</li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>
