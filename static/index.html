@@ -12,6 +12,7 @@
         }
 
         .btn-success {
+            margin-top: 20px;
             margin-bottom: 20px;
         }
     </style>
@@ -21,39 +22,30 @@
         app.controller('catchCtrl', function ($scope, $http) {
             $scope.catchDatas = [];
             $scope.search = function () {
+                document.getElementById('btnSearch').disabled = true;
                 $http({
                     method: 'GET',
                     url: './xysearch/' + $scope.keyWord
                 }).then(function (resp) {
                     console.log(resp);
+                    document.getElementById('btnSearch').disabled = false;
                     $scope.catchDatas = resp.data;
                 });
+                return false;
             };
         });
     </script>
 </head>
 <body>
 <div class="container" ng-controller="catchCtrl">
-    <form class="form-horizontal hjlsForm" action="" method="GET">
-        <div class="form-group">
-            <div class="col-xs-12">
-                <input type="text" class="form-control" id="" name="" placeholder="关键词" value=""
-                       ng-model="keyWord"
-                        >
-            </div>
-        </div>
-        <button type="button" class="btn btn-success btn-block btn-lg" ng-click="search()">提交</button>
-    </form>
+    <input type="text" class="form-control" id="" name="" placeholder="关键词" value="" ng-model="keyWord"/>
+    <button type="button" class="btn btn-success btn-block btn-lg" id="btnSearch" ng-click="search()">提交</button>
     <div class="panel panel-default">
-        <!-- Default panel contents -->
         <div class="panel-heading">抓取结果</div>
-        <!--<div class="panel-body">-->
-        <!--<p>...</p>-->
-        <!--</div>-->
-
         <table class="table">
             <tr ng-repeat="item in catchDatas">
                 <td>￥{{item.price}}</td>
+                <td><img src="" alt="" ng-src="{{item.imgUrl}}"/></td>
                 <td><a href="{{item.href}}">{{item.title}}</a></td>
             </tr>
         </table>

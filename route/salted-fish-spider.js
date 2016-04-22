@@ -63,7 +63,8 @@ function fetchUrls(readyToCatch, res) {
                 datas.push({
                     title: $(element).find('.item-title').text(),
                     price: $(element).find('.item-price .price em').text(),
-                    href: 'http:' + $(element).find('.item-title a').attr('href')
+                    href: 'http:' + $(element).find('.item-title a').attr('href'),
+                    imgUrl: 'http:' + $(element).find('.item-pic a img').attr('src')
                 });
             });
             alreadyCatch[url] = true;
