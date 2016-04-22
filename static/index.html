@@ -15,20 +15,40 @@
             margin-top: 20px;
             margin-bottom: 20px;
         }
+
+        .loading {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        .none {
+            display: none;
+        }
     </style>
     <script src="bower_components/angular/angular.min.js"></script>
     <script>
         var app = angular.module('catchApp', []);
         app.controller('catchCtrl', function ($scope, $http) {
             $scope.catchDatas = [];
+            $scope.isLoading = false;
             $scope.search = function () {
                 document.getElementById('btnSearch').disabled = true;
+                $scope.isLoading = true;
                 $http({
                     method: 'GET',
                     url: './xysearch/' + $scope.keyWord
                 }).then(function (resp) {
                     console.log(resp);
                     document.getElementById('btnSearch').disabled = false;
+                    $scope.isLoading = false;
                     $scope.catchDatas = resp.data;
                 });
                 return false;
@@ -38,15 +58,18 @@
 </head>
 <body>
 <div class="container" ng-controller="catchCtrl">
+    <img src="img/loading.gif" alt="" class="loading" ng-class="{none:!isLoading}"/>
     <input type="text" class="form-control" id="" name="" placeholder="关键词" value="" ng-model="keyWord"/>
     <button type="button" class="btn btn-success btn-block btn-lg" id="btnSearch" ng-click="search()">提交</button>
     <div class="panel panel-default">
         <div class="panel-heading">抓取结果</div>
         <table class="table">
             <tr ng-repeat="item in catchDatas">
-                <td>￥{{item.price}}</td>
-                <td><img src="" alt="" ng-src="{{item.imgUrl}}"/></td>
-                <td><a href="{{item.href}}">{{item.title}}</a></td>
+                <td><img class="thumbnail" src="" alt="" ng-src="{{item.imgUrl}}"/></td>
+                <td>
+                    <a href="{{item.href}}">{{item.title}}</a>
+                    <p>￥{{item.price}}</p>
+                </td>
             </tr>
         </table>
     </div>
