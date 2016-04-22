@@ -51,10 +51,12 @@
         <!--<p>...</p>-->
         <!--</div>-->
 
-        <!-- List group -->
-        <ul class="list-group">
-            <li class="list-group-item" ng-repeat="item in catchDatas">{{item.title}}:{{item.price}}</li>
-        </ul>
+        <table class="table">
+            <tr ng-repeat="item in catchDatas">
+                <td>￥{{item.price}}</td>
+                <td>{{item.title}}</td>
+            </tr>
+        </table>
     </div>
 </div>
 </body>

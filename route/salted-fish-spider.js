@@ -62,7 +62,7 @@ function fetchUrls(readyToCatch, res) {
             $('#J_ItemListsContainer .item-lists .item-info-wrapper').each(function (idx, element) {
                 datas.push({
                     title: $(element).find('.item-title').text(),
-                    price: $(element).find('.item-price .item-price em').text()
+                    price: $(element).find('.item-price .price em').text()
                 });
             });
             alreadyCatch[url] = true;
