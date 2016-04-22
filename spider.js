@@ -5,7 +5,7 @@
 var express = require('express');
 var app = express();
 var route = require('./route/route');
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3001;
 
 app.use(express.static(__dirname + '/static'));
 
