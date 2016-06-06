@@ -36,14 +36,14 @@ function filterCatchedAndDuplicate(oriArray, alreadyCatch) {
     return newArray2;
 }
 
-module.exports = function (req, res, next) {
+module.exports = function (searchname, callback) {
     alreadyCatch = {}, readyToCatch = [], datas = [];
-    readyToCatch.push('https://s.2.taobao.com/list/list.htm?q=' + chinese2Gb2312(req.params.name) + '&search_type=item&app=shopsearch');
-    fetchUrls(readyToCatch, res);
+    readyToCatch.push('https://s.2.taobao.com/list/list.htm?q=' + chinese2Gb2312(searchname) + '&search_type=item&app=shopsearch');
+    fetchUrls(readyToCatch, callback);
 };
 
 
-function fetchUrls(readyToCatch, res) {
+function fetchUrls(readyToCatch, callback) {
     var url = readyToCatch.pop();
     superagent.get(url)
         .charset('GBK')
@@ -70,14 +70,14 @@ function fetchUrls(readyToCatch, res) {
             alreadyCatch[url] = true;
             readyToCatch = filterCatchedAndDuplicate(readyToCatch, alreadyCatch);
             if (readyToCatch.length > 0) {
-                fetchUrls(readyToCatch, res);
-                console.log('已经catch：' + url);
-                console.log('readyToCatch.length:' + readyToCatch.length);
+                fetchUrls(readyToCatch, callback);
+                console.log('已经catch：' + url + '，还有'+readyToCatch.length+'个URL');
             } else {
                 datas.sort(function (a, b) {
                     return parseInt(a.price) - parseInt(b.price);
                 });
-                res.json(datas);
+                console.log('catch 完毕');
+                callback(datas);
             }
         });
 }

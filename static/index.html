@@ -65,9 +65,9 @@
         <div class="panel-heading">抓取结果</div>
         <table class="table">
             <tr ng-repeat="item in catchDatas">
-                <td><img class="thumbnail" src="" alt="" ng-src="{{item.imgUrl}}"/></td>
+                <!--<td><img class="thumbnail" src="" alt="" ng-src="{{item.imgUrl}}"/></td>-->
                 <td>
-                    <a href="{{item.href}}">{{item.title}}</a>
+                    <a href="{{item.href}}" target="_blank">{{item.title}}</a>
                     <p>￥{{item.price}}</p>
                 </td>
             </tr>
