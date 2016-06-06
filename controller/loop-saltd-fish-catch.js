@@ -7,6 +7,14 @@ var fs = require('fs');
 var SaltedCatch = require('../model/SaltedCatchObj');
 
 var keywords = JSON.parse(fs.readFileSync('./data/keywords.json'));
+fs.writeFile('./static/js/keywords.json',JSON.stringify(keywords),function(err){
+    if(err){
+        console.error(err);
+    } else {
+        console.log('前端keywords.json更新成功');
+        console.log('*******************************************************************************************');
+    }
+});
 
 module.exports = function () {
     keywords.forEach(function (keyword) {
