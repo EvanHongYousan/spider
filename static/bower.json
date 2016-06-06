@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "angular": "~1.5.3",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "moment": "^2.13.0"
   }
 }

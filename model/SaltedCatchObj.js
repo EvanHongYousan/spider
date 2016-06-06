@@ -29,4 +29,9 @@ SaltedCatchObjDAO.prototype.list = function (callback) {
         callback(err, objs);
     });
 };
+SaltedCatchObjDAO.prototype.findByKeyword = function (keyword, callback) {
+    SaltedCatchObj.find({keyword: keyword}, function (err, objs) {
+        callback(err, objs)
+    });
+};
 module.exports = new SaltedCatchObjDAO();

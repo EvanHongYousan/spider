@@ -4,7 +4,7 @@
 
 var Salted_fish_spider = require('./salted-fish-spider');
 var fs = require('fs');
-var SaltedCatch = require('../model/SaltedCatchObj');
+var SaltedCatchObj = require('../model/SaltedCatchObj');
 
 var keywords = JSON.parse(fs.readFileSync('./data/keywords.json'));
 fs.writeFile('./static/js/keywords.json',JSON.stringify(keywords),function(err){
@@ -27,9 +27,11 @@ module.exports = function () {
             }
             average = sum / (end - start + 1);
             for (i = 0; i < 10; i++) {
+                delete objs[parseInt(i * 0.1 * objs.length)].imgUrl;
+                delete objs[parseInt(i * 0.1 * objs.length)].href;
                 sampling.push(objs[parseInt(i * 0.1 * objs.length)]);
             }
-            SaltedCatch.save({
+            SaltedCatchObj.save({
                 keyword: keyword,
                 median_price: objs[parseInt(objs.length / 2)].price,
                 obj_count: objs.length,

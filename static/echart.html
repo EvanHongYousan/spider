@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echart</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+</head>
+<body>
+<div id="main" style="width: 100%;height:600px;"></div>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
+<script>
+    var keywords = undefined, totalObj = undefined;
+    $.get({
+        url: './js/keywords.json',
+        cache: false,
+        type: 'GET',
+        success: function (data) {
+            keywords = data;
+            doSomething();
+        }
+    });
+    $.get({
+        url: '/saltedcatchobjlist',
+        cache: false,
+        type: 'GET',
+        success: function (obj) {
+            totalObj = obj;
+            doSomething();
+        }
+    });
+    function doSomething() {
+        var attr = '';
+        if (keywords === undefined || totalObj === undefined) {
+            return;
+        }
+        var categories = {};
+        keywords.forEach(function(keyword){
+            totalObj.forEach(function(obj){
+                if(categories[keyword] === undefined){
+                    categories[keyword] = [];
+                    categories[keyword].push(obj);
+                } else {
+                    categories[keyword].push(obj);
+                }
+            });
+        });
+        console.log(categories);
+        for(attr in categories){};
+    }
+</script>
+</body>
+</html>

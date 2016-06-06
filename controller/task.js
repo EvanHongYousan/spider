@@ -10,7 +10,7 @@ var later = require('later');
  * @param intervalFn 定时执行的函数
  */
 module.exports = function (time, intervalFn) {
-    var sched = {schedules: [time]};
+    var sched = {schedules: [{h: [18], m: [19, 21, 23, 25, 27, 29]}]};
 
     // 设定为本地时间
     later.date.localTime();
