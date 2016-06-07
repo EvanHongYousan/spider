@@ -16,8 +16,9 @@ module.exports = {
         filename: 'bundle.js'
     },
     externals: {
-        //'react': 'React',
         'jquery': 'jQuery',
+        'react': 'React',
+        'react-dom':'ReactDOM',
         'moment': 'moment',
         'echarts': 'echarts'
     },
@@ -26,11 +27,11 @@ module.exports = {
             title: '闲鱼参考价',
             template: './static/templates/index.html'
         }),
-        //new webpack.optimize.UglifyJsPlugin({
-        //    compress: {
-        //        warnings: false
-        //    }
-        //})
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
     ],
     module: {
         loaders: [

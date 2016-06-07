@@ -4,7 +4,7 @@
   "description": "a spider",
   "main": "spider.js",
   "scripts": {
-    "build": "webpack --progress --profile --colors"
+    "build": "webpack --progress --profile --colors --display-modules"
   },
   "repository": {
     "type": "git",
