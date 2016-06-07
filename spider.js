@@ -9,7 +9,7 @@ var port = process.env.PORT || 3001;
 var task = require('./controller/task');
 var loop_saltd_fish_catch = require('./controller/loop-saltd-fish-catch');
 
-task({h: [11], m: [0]}, loop_saltd_fish_catch);
+task({h: [3], m: [0]}, loop_saltd_fish_catch);
 
 app.use(express.static(__dirname + '/static/build'));
 
