@@ -11,7 +11,7 @@ var loop_saltd_fish_catch = require('./controller/loop-saltd-fish-catch');
 
 task({h: [11], m: [0]}, loop_saltd_fish_catch);
 
-app.use(express.static(__dirname + '/static'));
+app.use(express.static(__dirname + '/static/build'));
 
 route(app);
 

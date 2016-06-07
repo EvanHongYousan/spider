@@ -8,6 +8,7 @@ var ReactDOM = require('react-dom');
 var moment = require('moment');
 var echarts = require('echarts');
 var darkTheme = require('./theme/dark');
+// var loadingImg = require('./images/loading.gif');
 
 var EchartInstance = React.createClass({
     getInitialState: function () {
@@ -101,17 +102,36 @@ var BigContainer = React.createClass({
         }
     },
     render: function () {
+        var loadingStyle = {
+            position:'fixed',
+            top:'50%',
+            left:'50%',
+            WebkitTransform:'translate(-50%,-50%)',
+            MozTransform:'translate(-50%,-50%)',
+            OTransform:'translate(-50%,-50%)',
+            transform:'translate(-50%,-50%)'
+        };
         var echarts = this.state.data.map(function (obj) {
             return (
                 <EchartInstance data={obj} key={obj.title.text}/>
             )
         });
-        return (
-            <div>
-                <h1 style={{color:'white',textAlign:'center'}}>闲鱼参考价</h1>
-                {echarts}
-            </div>
-        )
+        var result = '';
+        if(this.state.data.length===0){
+            result = (
+                <div>
+                    <img src="./images/loading.gif" style={loadingStyle}/>
+                </div>
+            );
+        } else {
+            result = (
+                <div>
+                    <h1 style={{color:'white',textAlign:'center'}}>闲鱼参考价</h1>
+                    {echarts}
+                </div>
+            );
+        }
+        return result;
     }
 });
 
