@@ -53,7 +53,7 @@
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: keyword
+                text: keyword + ' 咸鱼参考价'
             },
             tooltip: {
                 trigger: 'axis'
@@ -61,11 +61,11 @@
             legend: {
                 data: [keyword]
             },
-            toolbox: {
-                feature: {
-                    saveAsImage: {}
-                }
-            },
+//            toolbox: {
+//                feature: {
+//                    saveAsImage: {}
+//                }
+//            },
             xAxis: [
                 {
                     type: 'category',
