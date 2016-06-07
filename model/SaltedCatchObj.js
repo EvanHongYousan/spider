@@ -6,7 +6,7 @@ var mongodb = require('./mongodb');
 
 var SaltedCatchObjSchema = new mongodb.Schema({
     keyword: {type: String, default: 'no keyword'},
-    insert_data: {type: Date, default: Date.now},
+    insert_date: {type: Date, default: Date.now},
     median_price: {type: Number, default: 0},
     obj_count: {type: Number, default: 0},
     actual_target_title: {type: String, default: 'none'},

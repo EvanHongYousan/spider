@@ -36,18 +36,71 @@
             return;
         }
         var categories = {};
-        keywords.forEach(function(keyword){
-            totalObj.forEach(function(obj){
-                if(categories[keyword] === undefined){
-                    categories[keyword] = [];
-                    categories[keyword].push(obj);
-                } else {
-                    categories[keyword].push(obj);
-                }
-            });
+        totalObj.forEach(function (obj) {
+            if (categories[obj.keyword] === undefined) {
+                categories[obj.keyword] = [];
+                categories[obj.keyword].push(obj);
+            } else {
+                categories[obj.keyword].push(obj);
+            }
         });
         console.log(categories);
-        for(attr in categories){};
+        for (attr in categories) {
+            renderEchart(attr, categories[attr]);
+        }
+    }
+    function renderEchart(keyword, objs) {
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: keyword
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: [keyword]
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: []
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: keyword,
+                    type: 'line',
+                    stack: '总量',
+                    areaStyle: {normal: {}},
+                    data: []
+                }
+            ]
+        };
+        var i = 0;
+        for(i=0;i<objs.length;i++){
+            option.xAxis[0].data[i] = objs[i].insert_data;
+            option.series[0].data[i] = objs[i].median_price;
+        }
+        var myChart = echarts.init(document.getElementById('main'));
+        myChart.setOption(option);
     }
 </script>
 </body>
