@@ -65,12 +65,12 @@ module.exports = function () {
                 readyToCatch = filterCatchedAndDuplicate(readyToCatch, alreadyCatch);
                 if (readyToCatch.length > 0) {
                     fetchUrls(readyToCatch, callback);
-                    console.log('已经catch：' + url + '，还有' + readyToCatch.length + '个URL');
+                    // console.log('已经catch：' + url + '，还有' + readyToCatch.length + '个URL');
                 } else {
                     datas.sort(function (a, b) {
                         return parseInt(a.price) - parseInt(b.price);
                     });
-                    console.log('catch 完毕');
+                    // console.log('catch 完毕');
                     callback(datas);
                 }
             });

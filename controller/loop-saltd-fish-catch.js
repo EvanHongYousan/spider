@@ -17,7 +17,10 @@ var keywords = JSON.parse(fs.readFileSync('./data/keywords.json'));
 // });
 
 module.exports = function () {
+    console.log('*******************************************************************************************');
     keywords.forEach(function (keyword) {
+        console.log('当前时间：'+new Date());
+        console.log('keyword:'+keyword);
         var salted_fish_spider = new Salted_fish_spider();
         salted_fish_spider.do(keyword, function (objs) {
             var sampling = [];
@@ -41,10 +44,12 @@ module.exports = function () {
             }, function (err, info) {
                 if (err) {
                     console.error(err);
+                    console.log('入库失败');
                 }
                 if (info) {
-                    console.log(info);
-                    console.log('save success!');
+                    // console.log(info);
+                    // console.log('save success!');
+                    console.log('入库成功');
                 }
             });
         });
