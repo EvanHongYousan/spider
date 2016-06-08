@@ -8,7 +8,6 @@ var ReactDOM = require('react-dom');
 var moment = require('moment');
 var echarts = require('echarts');
 var darkTheme = require('./theme/dark');
-// var loadingImg = require('./images/loading.gif');
 
 var EchartInstance = React.createClass({
     getInitialState: function () {
@@ -37,6 +36,7 @@ var BigContainer = React.createClass({
             cache: false,
             type: 'GET',
             success: function (obj) {
+                console.log(obj);
                 doSomething(obj);
             }
         });
@@ -120,7 +120,7 @@ var BigContainer = React.createClass({
         if(this.state.data.length===0){
             result = (
                 <div>
-                    <img src="./images/loading.gif" style={loadingStyle}/>
+                    <img src={require('./images/loading.gif')} style={loadingStyle}/>
                 </div>
             );
         } else {

@@ -4,7 +4,7 @@
   "description": "a spider",
   "main": "spider.js",
   "scripts": {
-    "build": "webpack --progress --profile --colors --display-modules"
+    "build": "webpack --progress --profile --colors "
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "cheerio": "^0.20.0",
     "echarts": "^3.1.10",
     "express": "^4.13.4",
+    "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.19.0",
     "iconv-lite": "^0.4.13",
     "jquery": "^2.2.4",
@@ -34,6 +35,7 @@
     "react-dom": "^15.1.0",
     "superagent": "^1.8.3",
     "superagent-charset": "^1.0.0",
+    "url-loader": "^0.5.7",
     "webpack": "^1.13.1"
   }
 }

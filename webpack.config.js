@@ -18,7 +18,7 @@ module.exports = {
     externals: {
         'jquery': 'jQuery',
         'react': 'React',
-        'react-dom':'ReactDOM',
+        'react-dom': 'ReactDOM',
         'moment': 'moment',
         'echarts': 'echarts'
     },
@@ -42,6 +42,10 @@ module.exports = {
                 query: {
                     presets: ['react']
                 }
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|woff)$/,
+                loader: 'url-loader?limit=8192'
             }
         ]
     },
