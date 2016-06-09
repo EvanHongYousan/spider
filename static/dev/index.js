@@ -96,7 +96,7 @@ var BigContainer = React.createClass({
             var i = 0;
             for (i = 0; i < objs.length; i++) {
                 option.xAxis[0].data[i] = moment(objs[i].insert_date).format("YYYY-MM-DD");
-                option.series[0].data[i] = objs[i].average.fixed(5);
+                option.series[0].data[i] = objs[i].average.toFixed(5);
             }
             newData.push(option);
         }
