@@ -33,6 +33,7 @@
     "mongoose": "^4.4.19",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "react-router": "^2.4.1",
     "superagent": "^1.8.3",
     "superagent-charset": "^1.0.0",
     "url-loader": "^0.5.7",
