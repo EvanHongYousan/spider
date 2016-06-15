@@ -19,7 +19,6 @@ var BigContainer = React.createClass({
             cache: false,
             type: 'GET',
             success: function (obj) {
-                console.log(obj);
                 doSomething(obj);
             }
         });
@@ -113,6 +112,7 @@ var BigContainer = React.createClass({
                 <div>
                     <h1 style={{color:'white',textAlign:'center'}}>闲鱼参考价</h1>
                     {echarts}
+                    <p style={{color:'white',textAlign:'center',fontSize:'12px'}}>“闲鱼参考价”解释：每日抓取闲鱼上关键词条目，价格由低到高排序后，截取中间三分之一，并得出那三分之一的其平均数</p>
                 </div>
             );
         }
