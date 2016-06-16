@@ -2,16 +2,16 @@
  * Created by yantianyu on 2016/6/13 0013.
  */
 
-var React = require('react');
-var echarts = require('echarts');
-var darkTheme = require('../theme/dark');
+import React, {Component} from 'react'
+import echarts from 'echarts'
+import darkTheme from '../theme/dark'
 
-var EchartInstance = React.createClass({
+let EchartInstance = React.createClass({
     getInitialState: function () {
         return {data: []};
     },
     componentDidMount: function () {
-        var myEchartInstance = echarts.init(this.refs.echartContainer, darkTheme);
+        let myEchartInstance = echarts.init(this.refs.echartContainer, darkTheme);
         myEchartInstance.setOption(this.props.data);
     },
     render: function () {
@@ -21,4 +21,4 @@ var EchartInstance = React.createClass({
     }
 });
 
-module.exports = EchartInstance;
+export default EchartInstance

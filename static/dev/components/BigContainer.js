@@ -2,10 +2,10 @@
  * Created by yantianyu on 2016/6/13 0013.
  */
 
-var React = require('react');
-var $ = require('jquery');
-var moment = require('moment');
-var EchartInstance = require('./EchartInstance');
+import React from 'react'
+import $ from 'jquery'
+import moment from 'moment'
+import EchartInstance from './EchartInstance'
 
 var BigContainer = React.createClass({
     getInitialState: function () {
@@ -45,37 +45,12 @@ var BigContainer = React.createClass({
         function pushNewOptions(keyword, objs) {
             // 指定图表的配置项和数据
             var option = {
-                title: {
-                    text: keyword
-                },
-                tooltip: {
-                    trigger: 'axis'
-                },
-                legend: {
-                    data: [keyword]
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: []
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value',
-                        min: 'dataMin',
-                        max: 'dataMax'
-                    }
-                ],
-                series: [
-                    {
-                        name: keyword,
-                        type: 'line',
-                        stack: '总量',
-                        data: []
-                    }
-                ]
+                title: {text: keyword},
+                tooltip: {trigger: 'axis'},
+                legend: {data: [keyword]},
+                xAxis: [{type: 'category', boundaryGap: false, data: []}],
+                yAxis: [{type: 'value', min: 'dataMin', max: 'dataMax'}],
+                series: [{name: keyword, type: 'line', stack: '总量', data: []}]
             };
             var i = 0;
             for (i = 0; i < objs.length; i++) {
@@ -112,7 +87,8 @@ var BigContainer = React.createClass({
                 <div>
                     <h1 style={{color:'white',textAlign:'center'}}>闲鱼参考价</h1>
                     {echarts}
-                    <p style={{color:'white',textAlign:'center',fontSize:'12px'}}>“闲鱼参考价”解释：每日抓取闲鱼上关键词条目，价格由低到高排序后，截取中间三分之一，并得出那三分之一的其平均数</p>
+                    <p style={{color:'white',textAlign:'center',fontSize:'12px'}}>
+                        “闲鱼参考价”解释：每日抓取闲鱼上关键词条目，价格由低到高排序后，截取中间三分之一，并得出那三分之一的其平均数</p>
                 </div>
             );
         }
@@ -120,4 +96,4 @@ var BigContainer = React.createClass({
     }
 });
 
-module.exports = BigContainer;
+export default BigContainer
