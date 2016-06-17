@@ -32,6 +32,8 @@ module.exports = function () {
                 sum += objs[i].price;
             }
             average = sum / (end - start + 1);
+            mailOption.html += '<h1>' + keyword + '</h1>';
+            mailOption.html += '<p>中间三分之一平均数:' + average.toFixed(5) + '</p>';
             for (i = 0; i < 10; i++) {
                 mailOption.html += '<p>' + (i * 10) + '%取样：' + objs[parseInt(i * 0.1 * objs.length)].price + ' (<a href="' + objs[parseInt(i * 0.1 * objs.length)].href + '">' + objs[parseInt(i * 0.1 * objs.length)].title + '</a>)</p>';
                 delete objs[parseInt(i * 0.1 * objs.length)].imgUrl;
