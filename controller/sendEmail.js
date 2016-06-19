@@ -10,7 +10,7 @@ var smtpConfig = {
     secure: true, // use SSL
     auth: {
         user: '1370204201@qq.com',
-        pass: 'apzokcvhorajbabj'
+        pass: 'ztiywvqnjxdwidgc'
     }
 };
 var transporter = nodemailer.createTransport(smtpConfig);
