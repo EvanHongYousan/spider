@@ -3,8 +3,8 @@
  */
 
 var mongoose = require('mongoose');
+var config = require('../config');
 
-// mongoose.connect('mongodb://tadmin:tadmin@ds054288.mlab.com:54288/mtest');
-mongoose.connect('mongodb://madmin:madmin@ds023613.mlab.com:23613/msaltedfish');
+mongoose.connect(config.mongooseConnectUrl);
 
 module.exports = mongoose;

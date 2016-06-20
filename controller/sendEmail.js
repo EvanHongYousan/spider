@@ -2,16 +2,14 @@
  * Created by yantianyu on 2016/6/16 0016.
  */
 var nodemailer = require('nodemailer');
+var config = require('../config');
 
 // create reusable transporter object using the default SMTP transport
 var smtpConfig = {
     host: 'smtp.qq.com',
     port: 465,
     secure: true, // use SSL
-    auth: {
-        user: '1370204201@qq.com',
-        pass: 'ztiywvqnjxdwidgc'
-    }
+    auth: config.smtpAuth
 };
 var transporter = nodemailer.createTransport(smtpConfig);
 
