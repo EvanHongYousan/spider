@@ -3,11 +3,12 @@
  */
 
 import React from 'react'
+import {Link} from 'react-router'
 import $ from 'jquery'
 import moment from 'moment'
 import EchartInstance from './EchartInstance'
 
-var BigContainer = React.createClass({
+var Dashboard = React.createClass({
     getInitialState: function () {
         return {data: []};
     },
@@ -72,7 +73,10 @@ var BigContainer = React.createClass({
         };
         var echarts = this.state.data.map(function (obj) {
             return (
-                <EchartInstance data={obj} key={obj.title.text}/>
+                <div>
+                    <EchartInstance data={obj} key={obj.title.text}/>
+                    <Link to={'/detail/'+obj.title.text} style={{color:'white',marginBottom:'20px',display:'block'}}>查看百分比取样信息</Link>
+                </div>
             )
         });
         var result = '';
@@ -96,4 +100,4 @@ var BigContainer = React.createClass({
     }
 });
 
-export default BigContainer
+export default Dashboard
