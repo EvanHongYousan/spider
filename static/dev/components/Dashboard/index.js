@@ -6,7 +6,8 @@ import React from 'react'
 import {Link} from 'react-router'
 import $ from 'jquery'
 import moment from 'moment'
-import EchartInstance from './EchartInstance'
+import EchartInstance from '../EchartInstance'
+import {loading, title, p_text} from './style.css'
 
 var Dashboard = React.createClass({
     getInitialState: function () {
@@ -62,15 +63,6 @@ var Dashboard = React.createClass({
         }
     },
     render: function () {
-        var loadingStyle = {
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            WebkitTransform: 'translate(-50%,-50%)',
-            MozTransform: 'translate(-50%,-50%)',
-            OTransform: 'translate(-50%,-50%)',
-            transform: 'translate(-50%,-50%)'
-        };
         var echarts = this.state.data.map(function (obj) {
             return (
                 <div>
@@ -83,15 +75,15 @@ var Dashboard = React.createClass({
         if (this.state.data.length === 0) {
             result = (
                 <div>
-                    <img src={require('../images/loading.gif')} style={loadingStyle}/>
+                    <img src={require('../../images/loading.gif')} className={loading}/>
                 </div>
             );
         } else {
             result = (
                 <div>
-                    <h1 style={{color:'white',textAlign:'center'}}>闲鱼参考价</h1>
+                    <h1 className={title}>闲鱼参考价</h1>
                     {echarts}
-                    <p style={{color:'white',textAlign:'center',fontSize:'12px'}}>
+                    <p className={p_text}>
                         “闲鱼参考价”解释：每日抓取闲鱼上关键词条目，价格由低到高排序后，截取中间三分之一，并得出那三分之一的其平均数</p>
                 </div>
             );

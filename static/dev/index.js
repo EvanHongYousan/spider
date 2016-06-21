@@ -2,6 +2,8 @@
  * Created by yantianyu on 2016/6/7 0007.
  */
 
+import './base.css'
+
 import ReactDOM from 'react-dom'
 import {Router, Route, Link, IndexRoute, Redirect, useRouterHistory} from 'react-router'
 import createHashHistory from 'react-router/node_modules/history/lib/createHashHistory'

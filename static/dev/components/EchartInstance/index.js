@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react'
 import echarts from 'echarts'
-import darkTheme from '../theme/dark'
+import darkTheme from './dark'
 
 let EchartInstance = React.createClass({
     getInitialState: function () {

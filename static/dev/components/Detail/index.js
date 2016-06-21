@@ -6,7 +6,8 @@ import React from 'react'
 import {Link} from 'react-router'
 import $ from 'jquery'
 import moment from 'moment'
-import EchartInstance from './EchartInstance'
+import EchartInstance from '../EchartInstance'
+import {loading, title, p_text} from './style.css'
 
 var Detail = React.createClass({
     getInitialState: function () {
@@ -73,15 +74,6 @@ var Detail = React.createClass({
         }
     },
     render: function () {
-        var loadingStyle = {
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            WebkitTransform: 'translate(-50%,-50%)',
-            MozTransform: 'translate(-50%,-50%)',
-            OTransform: 'translate(-50%,-50%)',
-            transform: 'translate(-50%,-50%)'
-        };
         var result = '';
         var echarts = this.state.data.map(function (obj) {
             return (
@@ -93,15 +85,15 @@ var Detail = React.createClass({
         if (this.state.data.length === 0) {
             result = (
                 <div>
-                    <img src={require('../images/loading.gif')} style={loadingStyle}/>
+                    <img src={require('../../images/loading.gif')} className={loading}/>
                 </div>
             );
         } else {
             result = (
-                <div style={{color:'white'}}>
-                    <h1 style={{color:'white',textAlign:'center'}}>{this.props.params.keyword} (关键词取样详情)</h1>
+                <div>
+                    <h1 className={title}>{this.props.params.keyword} (关键词取样详情)</h1>
                     {echarts}
-                    <p style={{color:'white'}}>
+                    <p className={p_text}>
                         说明:把所有条目抓取并根据价格由低至高排序后，分成10分；0%取样就是第一份价格最低，10%取样是第二份价格最低，20%取样是第三份价格最低，以此类推。</p>
                 </div>
             );
